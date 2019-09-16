@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AlunoActivity"
-    tools:showIn="@layout/activity_aluno">
+    tools:showIn="@layout/activity_aluno"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/ler_qr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ler qr"></Button>
+    <Button
+        android:id="@+id/consulta_falta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Consultar Faltas"></Button>
 
 </LinearLayout>

@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".faltasActivity"></activity>
+        <activity android:name=".AulaActivity"></activity>
+        <activity
+            android:name=".ProfessorActivity"
+            android:label="@string/title_activity_professor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".faltasActivity" />
         <activity
             android:name=".AlunoActivity"
             android:label="@string/title_activity_aluno"

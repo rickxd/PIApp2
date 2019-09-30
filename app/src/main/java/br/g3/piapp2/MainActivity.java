@@ -2,6 +2,7 @@ package br.g3.piapp2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +22,17 @@ public class MainActivity extends AppCompatActivity {
 
         loginAluno.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                Intent alunoIntent = new Intent(MainActivity.this, AlunoActivity.class);
+                startActivity(alunoIntent);
+            }
+        });
 
+        loginProfessor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent professorIntent = new Intent(MainActivity.this, ProfessorActivity.class);
+                startActivity(professorIntent);
             }
         });
     }

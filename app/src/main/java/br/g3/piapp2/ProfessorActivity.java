@@ -1,6 +1,5 @@
 package br.g3.piapp2;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -10,37 +9,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class AlunoActivity extends AppCompatActivity {
-    private MateriaDAO materiaDAO;
-    private ArrayList<Materia> lista;
-    private ListView aulasListView;
+public class ProfessorActivity extends AppCompatActivity {
+
+    private ArrayList<String> lista;
+    private ListView professorListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aluno);
+        setContentView(R.layout.activity_professor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        materiaDAO = new MateriaDAO(this);
-        aulasListView = findViewById(R.id.aulasListView);
-        lista = materiaDAO.busca();
-        MateriaArrayAdapter adapter = new MateriaArrayAdapter(this, lista);
-        aulasListView.setAdapter(adapter);
-        aulasListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Materia materiaSelecionada = lista.get(position);
-                Intent intent = new Intent (AlunoActivity.this, AulaActivity.class );
-                intent.putExtra("aula_escolhida", materiaSelecionada);
-                startActivity(intent);
-            }
-        });
+
+        professorListView = findViewById(R.id.professorListView);
+        lista = gerarLista();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
+        professorListView.setAdapter(adapter);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

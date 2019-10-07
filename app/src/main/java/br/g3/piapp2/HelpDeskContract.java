@@ -2,6 +2,7 @@ package br.g3.piapp2;
 
 import android.provider.BaseColumns;
 
+import java.util.Date;
 import java.util.Locale;
 
 public class HelpDeskContract {
@@ -15,6 +16,28 @@ public class HelpDeskContract {
         materia.setNome("Projeto Integrado");
         materia.setHorario("19h10");
         materia.setIconId(R.drawable.ic_launcher_background);
+    }
+
+    public static class FaltaContract implements BaseColumns{
+        public static final String TABLE_NAME = "tb_falta";
+        public static final String COLUMN_NAME_ID = "id_falta";
+        public static final String COLUMN_NAME_DATA = "data";
+    }
+
+    public static class AlunoContract implements BaseColumns{
+        public static final String TABLE_NAME = "tb_aluno";
+        public static final String COLUMN_NAME_ID = "id_aluno";
+        public static final String COLUMN_NAME_NOME = "nome";
+        public static final String COLUMN_NAME_RA = "ra";
+        public static final String COLUMN_NAME_SENHA = "senha";
+    }
+
+    public static class ProfessorContract implements BaseColumns{
+        public static final String TABLE_NAME = "tb_professor";
+        public static final String COLUMN_NAME_ID = "id_professor";
+        public static final String COLUMN_NAME_NOME = "nome";
+        public static final String COLUMN_NAME_RA = "ra";
+        public static final String COLUMN_NAME_SENHA = "senha";
     }
 
     public static class MateriaContract implements BaseColumns {

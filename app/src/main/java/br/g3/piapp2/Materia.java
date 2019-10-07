@@ -1,12 +1,15 @@
 package br.g3.piapp2;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Materia implements Serializable {
     private int id;
     private String nome;
     private String horario;
     private int iconId;
+    private Professor professor;
+    private ArrayList<Aluno> alunos;
 
     public int getId() {
         return id;
@@ -38,5 +41,21 @@ public class Materia implements Serializable {
 
     public void setIconId(int iconId) {
         this.iconId = iconId;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public ArrayList<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(ArrayList<Aluno> alunos) {
+        this.alunos = alunos;
     }
 }

@@ -2,14 +2,26 @@ package br.g3.piapp2;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Materia implements Serializable {
     private int id;
     private String nome;
-    private String horario;
     private int iconId;
-    private Professor professor;
-    private ArrayList<Aluno> alunos;
+    private List<Professor> professor;
+
+    private List<Presenca> presencas;
+    private List<Horario> horarios;
+    private List<Turma> turmas;
+
+    public Materia(){
+
+    }
+
+    public Materia (int id, String nome){
+        this.id = id;
+        this.nome = nome;
+    }
 
     public int getId() {
         return id;
@@ -27,14 +39,6 @@ public class Materia implements Serializable {
         this.nome = nome;
     }
 
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
     public int getIconId() {
         return iconId;
     }
@@ -43,19 +47,35 @@ public class Materia implements Serializable {
         this.iconId = iconId;
     }
 
-    public Professor getProfessor() {
+    public List<Professor> getProfessor() {
         return professor;
     }
 
-    public void setProfessor(Professor professor) {
+    public void setProfessor(List<Professor> professor) {
         this.professor = professor;
     }
 
-    public ArrayList<Aluno> getAlunos() {
-        return alunos;
+    public List<Presenca> getPresencas() {
+        return presencas;
     }
 
-    public void setAlunos(ArrayList<Aluno> alunos) {
-        this.alunos = alunos;
+    public void setPresencas(List<Presenca> presencas) {
+        this.presencas = presencas;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 }

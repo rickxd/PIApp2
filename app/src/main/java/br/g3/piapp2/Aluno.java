@@ -1,13 +1,14 @@
 package br.g3.piapp2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Aluno {
     private int id;
     private String nome;
     private String ra;
     private String senha;
-    private ArrayList<Falta> faltas;
+    private List<Presenca> presencas;
 
     public int getId() {
         return id;
@@ -41,11 +42,11 @@ public class Aluno {
         this.senha = senha;
     }
 
-    public ArrayList<Falta> getFaltas() {
-        return faltas;
+    public List<Presenca> getPresencas() {
+        return presencas;
     }
 
-    public void setFaltas(ArrayList<Falta> faltas) {
-        this.faltas = faltas;
+    public void setPresencas(List<Presenca> presencas) {
+        this.presencas = presencas;
     }
 }

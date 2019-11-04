@@ -1,10 +1,15 @@
 package br.g3.piapp2;
 
+import java.util.List;
+
 public class Professor {
     private int id;
+    private String email;
     private String nome;
     private String ra;
     private String senha;
+
+    private List<Materia> materias;
 
     public int getId() {
         return id;
@@ -36,5 +41,21 @@ public class Professor {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Materia> getMaterias() {
+        return materias;
+    }
+
+    public void setMaterias(List<Materia> materias) {
+        this.materias = materias;
     }
 }

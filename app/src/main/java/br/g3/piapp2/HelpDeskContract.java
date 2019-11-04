@@ -14,7 +14,7 @@ public class HelpDeskContract {
         materia = new Materia();
         materia.setId(1);
         materia.setNome("Projeto Integrado");
-        materia.setHorario("19h10");
+        //materia.setHorario("19h10");
         materia.setIconId(R.drawable.ic_launcher_background);
     }
 
@@ -73,7 +73,7 @@ public class HelpDeskContract {
                         MateriaContract.COLUMN_NAME_ICON_ID,
                         materia.getId(),
                         materia.getNome(),
-                        materia.getHorario(),
+                        //materia.getHorario(),
                         materia.getIconId()
 
                 )

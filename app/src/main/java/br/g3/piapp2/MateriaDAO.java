@@ -64,7 +64,7 @@ public class MateriaDAO {
             Materia materia = new Materia();
             materia.setId(idMateria);
             materia.setNome(nome);
-            materia.setHorario(horario);
+            //materia.setHorario(horario);
             materia.setIconId(iconId);
             materias.add(materia);
         }

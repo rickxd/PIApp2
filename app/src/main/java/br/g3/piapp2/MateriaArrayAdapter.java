@@ -25,7 +25,7 @@ public class MateriaArrayAdapter extends ArrayAdapter<Materia> {
         TextView horarioListaTextView = view.findViewById(R.id.horarioListaTextView);
         materiaIconImageView.setImageResource(materiaDaVez.getIconId());
         nomeListaTextView.setText(materiaDaVez.getNome());
-        horarioListaTextView.setText(materiaDaVez.getHorario());
+        //horarioListaTextView.setText(materiaDaVez.getHorario());
         return view;
     }
 }

@@ -18,14 +18,14 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/ler_qr"
+        android:id="@+id/lerQrButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ler qr"/>
+        android:text="Ler qr"/>
     <Button
         android:id="@+id/consulta_falta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Consultar Faltas"/>
+        android:text="Consultar Faltas"/>
 
 </LinearLayout>

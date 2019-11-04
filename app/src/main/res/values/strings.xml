@@ -2,4 +2,11 @@
     <string name="app_name">PIApp2</string>
     <string name="title_activity_aluno">AlunoActivity</string>
     <string name="title_activity_professor">ProfessorActivity</string>
+
+    <string name="host_address">http://172.17.100.2</string>
+    <string name="host_port">:8080</string>
+    <string name="endpoint_base">/materia</string>
+    <string name="endpoint_listar">/lista</string>
+    <string name="endpoint_salvar">/salvar</string>
+    <string name="endpoint_buscar_por_id">/%d</string>
 </resources>

@@ -77,7 +77,7 @@ public class AlunoActivity extends AppCompatActivity {
     }
 
     public void obterMaterias(){
-        String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base),getString(R.string.endpoint_listar));
+        String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base_materia),getString(R.string.endpoint_listar));
         requestQueue.add(
                 new JsonArrayRequest(
                         Request.Method.GET,

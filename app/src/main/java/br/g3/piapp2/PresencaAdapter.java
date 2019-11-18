@@ -6,10 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class PresencaAdapter {
+public class PresencaAdapter extends RecyclerView.Adapter<PresencaViewHolder> {
     private Context context;
 
     private List<Presenca> presencas;
@@ -20,7 +21,7 @@ public class PresencaAdapter {
 
     public PresencaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         LayoutInflater inflater = LayoutInflater.from(context);
-        View raiz = inflater.inflate(R.layout.list_item,parent,false);
+        View raiz = inflater.inflate(R.layout.presencas_item,parent,false);
         return new PresencaViewHolder(raiz);
     }
 

@@ -5,8 +5,12 @@
 
     <string name="host_address">http://172.17.100.2</string>
     <string name="host_port">:8080</string>
-    <string name="endpoint_base">/materia</string>
+    <string name="endpoint_base_materia">/materia</string>
+    <string name="endpoint_base_aluno">/aluno</string>
     <string name="endpoint_listar">/lista</string>
     <string name="endpoint_salvar">/salvar</string>
     <string name="endpoint_buscar_por_id">/%d</string>
+    <string name="endpoint_login">/login</string>
+    <string name="endpoint_email">/%s</string>
+    <string name="endpoint_senha">/%s</string>
 </resources>

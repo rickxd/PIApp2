@@ -18,15 +18,19 @@ public class AulaActivity extends AppCompatActivity {
     private TextView tituloTextView;
     private TextView horaTextView;
     private Button lerQrButton;
+    private Button consultarFaltasButton;
+    private Aluno logado;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aula);
+        logado = (Aluno) getIntent().getSerializableExtra("logado");
         tituloTextView = findViewById(R.id.tituloTextView);
         horaTextView = findViewById(R.id.horaTextView);
         lerQrButton = findViewById(R.id.lerQrButton);
+        consultarFaltasButton = findViewById(R.id.consultarFaltasButton);
         Intent origemIntent = getIntent();
         Materia aulaEscolhida = (Materia) origemIntent.getSerializableExtra("aula_escolhida");
         tituloTextView.setText(aulaEscolhida.getNome());
@@ -41,6 +45,16 @@ public class AulaActivity extends AppCompatActivity {
                 integrator.setPrompt("Camera Scan");
                 integrator.setCameraId(0);
                 integrator.initiateScan();
+            }
+        });
+
+        consultarFaltasButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AulaActivity.this, faltasActivity.class);
+                intent.putExtra("materia", aulaEscolhida);
+                intent.putExtra("logado", logado);
+                startActivity(intent);
             }
         });
     }

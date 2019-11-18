@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Ler qr"/>
     <Button
-        android:id="@+id/consulta_falta"
+        android:id="@+id/consultarFaltasButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Consultar Faltas"/>

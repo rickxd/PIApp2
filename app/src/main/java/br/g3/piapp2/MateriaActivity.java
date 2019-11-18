@@ -33,11 +33,13 @@ public class MateriaActivity extends AppCompatActivity {
     private MateriaAdapter adapter;
     private List<Materia> materias;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private Aluno logado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_materia);
+        logado = (Aluno) getIntent().getSerializableExtra("logado");
         requestQueue = Volley.newRequestQueue(this);
         materiasRecyclerView = findViewById(R.id.materiasRecyclerView);
         materias = new ArrayList<Materia>();
@@ -63,6 +65,7 @@ public class MateriaActivity extends AppCompatActivity {
                 Materia materiaSelecionada = materias.get(position);
                 Intent intent = new Intent (MateriaActivity.this, AulaActivity.class );
                 intent.putExtra("aula_escolhida", materiaSelecionada);
+                intent.putExtra("logado", logado);
                 startActivity(intent);
             }
             @Override
@@ -133,7 +136,7 @@ public class MateriaActivity extends AppCompatActivity {
     }
 
     public void obterMaterias(){
-        String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base),getString(R.string.endpoint_listar));
+        String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base_materia),getString(R.string.endpoint_listar));
         requestQueue.add(
                 new JsonArrayRequest(
                         Request.Method.GET,

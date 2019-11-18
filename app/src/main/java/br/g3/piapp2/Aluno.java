@@ -1,9 +1,10 @@
 package br.g3.piapp2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Aluno {
+public class Aluno implements Serializable {
     private int id;
     private String nome;
     private String ra;

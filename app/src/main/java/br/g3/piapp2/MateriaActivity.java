@@ -33,13 +33,19 @@ public class MateriaActivity extends AppCompatActivity {
     private MateriaAdapter adapter;
     private List<Materia> materias;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private Aluno logado;
+    private Aluno aLogado;
+    private Professor pLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_materia);
-        logado = (Aluno) getIntent().getSerializableExtra("logado");
+        Intent origem = getIntent();
+        if(origem.getSerializableExtra("alunoLogado") != null) {
+            aLogado = (Aluno) origem.getSerializableExtra("alunoLogado");
+        }else{
+            pLogado = (Professor) origem.getSerializableExtra("professorLogado");
+        }
         requestQueue = Volley.newRequestQueue(this);
         materiasRecyclerView = findViewById(R.id.materiasRecyclerView);
         materias = new ArrayList<Materia>();
@@ -65,7 +71,11 @@ public class MateriaActivity extends AppCompatActivity {
                 Materia materiaSelecionada = materias.get(position);
                 Intent intent = new Intent (MateriaActivity.this, AulaActivity.class );
                 intent.putExtra("aula_escolhida", materiaSelecionada);
-                intent.putExtra("logado", logado);
+                if(aLogado != null) {
+                    intent.putExtra("aLogado", aLogado);
+                }else{
+                    intent.putExtra("pLogado", pLogado);
+                }
                 startActivity(intent);
             }
             @Override

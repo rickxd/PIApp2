@@ -28,8 +28,10 @@ public class PresencaAdapter extends RecyclerView.Adapter<PresencaViewHolder> {
     public void onBindViewHolder(@NonNull PresencaViewHolder holder, int position) {
         Presenca presenca = this.presencas.get(position);
         holder.materiaTextView.setText(presenca.getMateria().getNome());
-        holder.dataTextView.setText(presenca.getData().toString());
-        holder.estadoTextView.setText(presenca.getPresente());
+        if(presenca.getData() != null) {
+            holder.dataTextView.setText(presenca.getData().toString());
+        }
+        holder.estadoTextView.setText("" + presenca.getPresente());
     }
     public int getItemCount() {
         return presencas.size();

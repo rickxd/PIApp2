@@ -1,8 +1,9 @@
 package br.g3.piapp2;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Professor {
+public class Professor implements Serializable {
     private int id;
     private String email;
     private String nome;

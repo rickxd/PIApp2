@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private RequestQueue requestQueue;
     private Aluno alunoLogado;
+    private Professor professorLogado;
     private EditText raEditText;
     private EditText senhaEditText;
     private Button loginProfessor;
@@ -51,27 +52,48 @@ public class MainActivity extends AppCompatActivity {
         loginAluno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fazerLogin(view);
+                fazerLoginAluno(view);
             }
         });
 
         loginProfessor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent professorIntent = new Intent(MainActivity.this, ProfessorActivity.class);
-                startActivity(professorIntent);
+                fazerLoginProfessor(view);
             }
         });
     }
 
-    public void fazerLogin(View view){
+    public void fazerLoginAluno(View view){
         String login = raEditText.getEditableText().toString();
         String senha = senhaEditText.getEditableText().toString();
         mAuth.signInWithEmailAndPassword(login, senha).addOnSuccessListener((Result) -> {
-            obterLogin(login, senha);
+            //obterLogin(login, senha);
+            alunoLogado = new Aluno();
+            alunoLogado.setRa(login);
+            alunoLogado.setSenha(senha);
             Intent intent = new Intent (this, MateriaActivity.class);
-            intent.putExtra("logado", alunoLogado);
+            intent.putExtra("alunoLogado", alunoLogado);
             startActivity (intent);
+
+        }).addOnFailureListener((exception) -> {
+            exception.printStackTrace();
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    public void fazerLoginProfessor(View view){
+        String login = raEditText.getEditableText().toString();
+        String senha = senhaEditText.getEditableText().toString();
+        mAuth.signInWithEmailAndPassword(login, senha).addOnSuccessListener((Result) -> {
+            //obterLogin(login, senha);
+            professorLogado = new Professor();
+            professorLogado.setRa(login);
+            professorLogado.setSenha(senha);
+            Intent intent = new Intent (this, MateriaActivity.class);
+            intent.putExtra("professorLogado", professorLogado);
+            startActivity (intent);
+
         }).addOnFailureListener((exception) -> {
             exception.printStackTrace();
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
@@ -89,22 +111,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void obterLogin(String login, String senha){
         String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base_aluno),getString(R.string.endpoint_login), getString(R.string.endpoint_email), getString(R.string.endpoint_senha));
-        String.format(url, login, senha);
         Gson gson = new GsonBuilder().create();
         requestQueue.add(
                 new JsonObjectRequest(
                         Request.Method.GET,
-                        url,
+                        String.format(url, login, senha),
                         null,
                         new Response.Listener<JSONObject>(){
                             @Override
                             public void onResponse(JSONObject response){
-                                try {
-                                    alunoLogado = gson.fromJson(response.getJSONObject("aluno").toString(), Aluno.class);
-                                }
-                                catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                alunoLogado = gson.fromJson(response.toString(), Aluno.class);
+                                Intent intent = new Intent (MainActivity.this, MateriaActivity.class);
+                                intent.putExtra("logado", alunoLogado);
+                                startActivity (intent);
                             }
                         },
                         new Response.ErrorListener() {

@@ -13,4 +13,6 @@
     <string name="endpoint_login">/login</string>
     <string name="endpoint_email">/%s</string>
     <string name="endpoint_senha">/%s</string>
+    <string name="endpoint_base_presenca">/presenca</string>
+    <string name="endpoint_atualizar">/atualizar/%s/%d/%d</string>
 </resources>

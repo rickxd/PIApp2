@@ -7,6 +7,7 @@ import java.util.List;
 public class Aluno implements Serializable {
     private int id;
     private String nome;
+    private String email;
     private String ra;
     private String senha;
     private List<Presenca> presencas;
@@ -49,5 +50,13 @@ public class Aluno implements Serializable {
 
     public void setPresencas(List<Presenca> presencas) {
         this.presencas = presencas;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

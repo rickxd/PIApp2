@@ -51,7 +51,12 @@ public class faltasActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         Intent origemIntent = getIntent();
         aLogado = (Aluno) origemIntent.getSerializableExtra("aLogado");
-        obterLogin(aLogado.getRa(), aLogado.getSenha());
+        //obterLogin(aLogado.getRa(), aLogado.getSenha());
+        presencas = aLogado.getPresencas();
+        adapter = new PresencaAdapter(faltasActivity.this, presencas);
+        LinearLayoutManager llm = new LinearLayoutManager(faltasActivity.this);
+        presencasRecyclerView.setAdapter(adapter);
+        presencasRecyclerView.setLayoutManager(llm);
         materia = (Materia) origemIntent.getSerializableExtra("materia");
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);

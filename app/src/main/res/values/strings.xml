@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">PIApp2</string>
-    <string name="title_activity_aluno">AlunoActivity</string>
-    <string name="title_activity_professor">ProfessorActivity</string>
+    <string name="app_name">Tô de Olho</string>
+    <string name="title_activity_aluno">Página do Aluno</string>
+    <string name="title_activity_professor">Página do Professor</string>
 
-    <string name="host_address">http://172.17.100.2</string>
+    <string name="host_address">http://10.0.2.2</string>
     <string name="host_port">:8080</string>
     <string name="endpoint_base_materia">/materia</string>
     <string name="endpoint_base_aluno">/aluno</string>

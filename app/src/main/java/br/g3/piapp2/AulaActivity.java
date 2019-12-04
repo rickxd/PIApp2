@@ -20,10 +20,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -31,6 +33,8 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -41,6 +45,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class AulaActivity extends AppCompatActivity {
     private TextView tituloTextView;
@@ -53,6 +58,7 @@ public class AulaActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private Materia aulaEscolhida;
     private Bitmap bitmap;
+    private List<Presenca> presencas;
 
 
     @Override
@@ -93,6 +99,7 @@ public class AulaActivity extends AppCompatActivity {
                 }else{
                     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     String sData = formatter.format(new Date());
+                    obterPresencas(aulaEscolhida.getId());
                     QRCodeWriter writer = new QRCodeWriter();
                     try {
                         BitMatrix bitMatrix = writer.encode(sData, BarcodeFormat.QR_CODE, 512, 512);
@@ -159,6 +166,62 @@ public class AulaActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response){
                                 aLogado = gson.fromJson(response.toString(), Aluno.class);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }
+                )
+        );
+    }
+
+    private void obterPresencas(int id){
+        String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base_presenca),getString(R.string.endpoint_buscar_por_id));
+        Gson gson = new GsonBuilder().create();
+        requestQueue.add(
+                new JsonArrayRequest(
+                        Request.Method.GET,
+                        String.format(url, id),
+                        null,
+                        new Response.Listener<JSONArray>(){
+                            @Override
+                            public void onResponse(JSONArray response){
+                                    presencas.add(gson.fromJson(response.toString(), new TypeToken<List<Presenca>>(){}.getType()));
+                                for(Presenca p : presencas){
+                                    p.setIdPresenca(0);
+                                    p.setData(new Date());
+                                }
+                                fazFalta(presencas);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }
+                )
+        );
+    }
+
+    public void fazFalta(List<Presenca> presencas){
+        String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base_presenca),getString(R.string.endpoint_salvar));
+        JSONArray jsonArray = new JSONArray();
+        for(Presenca p : presencas){
+            jsonArray.put(p);
+        }
+        requestQueue.add(
+                new JsonArrayRequest(
+                        Request.Method.POST,
+                        url,
+                        jsonArray,
+                        new Response.Listener<JSONArray>(){
+                            @Override
+                            public void onResponse(JSONArray response){
+                                alert("Lista Gerada!");
                             }
                         },
                         new Response.ErrorListener() {

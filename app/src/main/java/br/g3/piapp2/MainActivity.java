@@ -68,13 +68,16 @@ public class MainActivity extends AppCompatActivity {
         String login = raEditText.getEditableText().toString();
         String senha = senhaEditText.getEditableText().toString();
         mAuth.signInWithEmailAndPassword(login, senha).addOnSuccessListener((Result) -> {
-            //obterLogin(login, senha);
+            obterLoginAluno(login, senha);
+
+            /*
             alunoLogado = new Aluno();
             alunoLogado.setRa(login);
             alunoLogado.setSenha(senha);
             Intent intent = new Intent (this, MateriaActivity.class);
             intent.putExtra("alunoLogado", alunoLogado);
             startActivity (intent);
+             */
 
         }).addOnFailureListener((exception) -> {
             exception.printStackTrace();
@@ -109,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString();
     }
 
-    public void obterLogin(String login, String senha){
+    public void obterLoginAluno(String login, String senha){
         String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base_aluno),getString(R.string.endpoint_login), getString(R.string.endpoint_email), getString(R.string.endpoint_senha));
         Gson gson = new GsonBuilder().create();
         requestQueue.add(
@@ -122,7 +125,34 @@ public class MainActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response){
                                 alunoLogado = gson.fromJson(response.toString(), Aluno.class);
                                 Intent intent = new Intent (MainActivity.this, MateriaActivity.class);
-                                intent.putExtra("logado", alunoLogado);
+                                intent.putExtra("alunoLogado", alunoLogado);
+                                startActivity (intent);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }
+                )
+        );
+    }
+
+    public void obterLoginProfessor(String login, String senha){
+        String url = montaUrl(getString(R.string.host_address),getString(R.string.host_port),getString(R.string.endpoint_base_aluno),getString(R.string.endpoint_login), getString(R.string.endpoint_email), getString(R.string.endpoint_senha));
+        Gson gson = new GsonBuilder().create();
+        requestQueue.add(
+                new JsonObjectRequest(
+                        Request.Method.GET,
+                        String.format(url, login, senha),
+                        null,
+                        new Response.Listener<JSONObject>(){
+                            @Override
+                            public void onResponse(JSONObject response){
+                                professorLogado = gson.fromJson(response.toString(), Professor.class);
+                                Intent intent = new Intent (MainActivity.this, MateriaActivity.class);
+                                intent.putExtra("professorLogado", professorLogado);
                                 startActivity (intent);
                             }
                         },

@@ -12,7 +12,7 @@
         android:id="@+id/raEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="RA"
+        android:hint="E-mail"
         android:layout_marginTop="20dp"></EditText>
     <EditText
         android:id="@+id/senhaEditText"
